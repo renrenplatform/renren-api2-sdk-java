@@ -20,7 +20,7 @@ import com.renren.api.service.StatusService;
 import com.renren.api.service.AlbumService;
 import com.renren.api.service.UbbService;
 import com.renren.api.service.NotificationService;
-import com.renren.api.service.CommentService;
+import com.renren.api.service.FeedService;
 import com.renren.api.service.BlogService;
 import com.renren.api.service.PhotoService;
 import com.renren.api.service.UserService;
@@ -79,9 +79,9 @@ public class RennClient {
      */
     private NotificationService notificationService;
     /**
-     *  comment 对应的API服务
+     *  feed 对应的API服务
      */
-    private CommentService commentService;
+    private FeedService feedService;
     /**
      *  blog 对应的API服务
      */
@@ -155,7 +155,7 @@ public class RennClient {
                 return new AccessToken(type, accessToken, refreshToken, macKey, macAlgorithm);
 
             } else {
-                throw new AuthorizationException("Authorization failed. "
+                throw new AuthorizationException("Authorization failed with Authorization Code. "
                         + response.getString("error") + ": "
                         + response.getString("error_description"));
             }
@@ -249,13 +249,13 @@ public class RennClient {
         return notificationService;
     }
     /**
-     * @return the commentService
+     * @return the feedService
      */
-    public CommentService getCommentService(){
-        if (commentService == null) {
-            commentService = new CommentService(executor, accessToken, objectMapper);
+    public FeedService getFeedService(){
+        if (feedService == null) {
+            feedService = new FeedService(executor, accessToken, objectMapper);
         }
-        return commentService;
+        return feedService;
     }
     /**
      * @return the blogService
