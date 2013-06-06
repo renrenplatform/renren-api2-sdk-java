@@ -42,6 +42,7 @@ public class RennError {
                 exception = new InternalErrorException("UNKNOW");
                 break;
         }
+        exception.setMessage(this.getMessage());
         return exception;
     }
 

@@ -15,14 +15,18 @@ import com.renren.api.http.HttpRequest.HttpRequestException;
 import com.renren.api.json.JSONException;
 import com.renren.api.json.JSONObject;
 import com.renren.api.mapper.ObjectMapper;
-import com.renren.api.service.ShareService;
+import com.renren.api.service.AppService;
+import com.renren.api.service.LocationService;
 import com.renren.api.service.StatusService;
 import com.renren.api.service.AlbumService;
-import com.renren.api.service.UbbService;
-import com.renren.api.service.NotificationService;
-import com.renren.api.service.FeedService;
 import com.renren.api.service.BlogService;
+import com.renren.api.service.LikeService;
 import com.renren.api.service.PhotoService;
+import com.renren.api.service.ShareService;
+import com.renren.api.service.NotificationService;
+import com.renren.api.service.UbbService;
+import com.renren.api.service.FeedService;
+import com.renren.api.service.CommentService;
 import com.renren.api.service.UserService;
 import com.renren.api.service.ProfileService;
 
@@ -59,9 +63,13 @@ public class RennClient {
     private ObjectMapper objectMapper;
 
     /**
-     *  share 对应的API服务
+     *  app 对应的API服务
      */
-    private ShareService shareService;
+    private AppService appService;
+    /**
+     *  location 对应的API服务
+     */
+    private LocationService locationService;
     /**
      *  status 对应的API服务
      */
@@ -71,25 +79,37 @@ public class RennClient {
      */
     private AlbumService albumService;
     /**
-     *  ubb 对应的API服务
+     *  blog 对应的API服务
      */
-    private UbbService ubbService;
+    private BlogService blogService;
+    /**
+     *  like 对应的API服务
+     */
+    private LikeService likeService;
+    /**
+     *  photo 对应的API服务
+     */
+    private PhotoService photoService;
+    /**
+     *  share 对应的API服务
+     */
+    private ShareService shareService;
     /**
      *  notification 对应的API服务
      */
     private NotificationService notificationService;
     /**
+     *  ubb 对应的API服务
+     */
+    private UbbService ubbService;
+    /**
      *  feed 对应的API服务
      */
     private FeedService feedService;
     /**
-     *  blog 对应的API服务
+     *  comment 对应的API服务
      */
-    private BlogService blogService;
-    /**
-     *  photo 对应的API服务
-     */
-    private PhotoService photoService;
+    private CommentService commentService;
     /**
      *  user 对应的API服务
      */
@@ -204,13 +224,22 @@ public class RennClient {
     }
 
     /**
-     * @return the shareService
+     * @return the appService
      */
-    public ShareService getShareService(){
-        if (shareService == null) {
-            shareService = new ShareService(executor, accessToken, objectMapper);
+    public AppService getAppService(){
+        if (appService == null) {
+            appService = new AppService(executor, accessToken, objectMapper);
         }
-        return shareService;
+        return appService;
+    }
+    /**
+     * @return the locationService
+     */
+    public LocationService getLocationService(){
+        if (locationService == null) {
+            locationService = new LocationService(executor, accessToken, objectMapper);
+        }
+        return locationService;
     }
     /**
      * @return the statusService
@@ -231,13 +260,40 @@ public class RennClient {
         return albumService;
     }
     /**
-     * @return the ubbService
+     * @return the blogService
      */
-    public UbbService getUbbService(){
-        if (ubbService == null) {
-            ubbService = new UbbService(executor, accessToken, objectMapper);
+    public BlogService getBlogService(){
+        if (blogService == null) {
+            blogService = new BlogService(executor, accessToken, objectMapper);
         }
-        return ubbService;
+        return blogService;
+    }
+    /**
+     * @return the likeService
+     */
+    public LikeService getLikeService(){
+        if (likeService == null) {
+            likeService = new LikeService(executor, accessToken, objectMapper);
+        }
+        return likeService;
+    }
+    /**
+     * @return the photoService
+     */
+    public PhotoService getPhotoService(){
+        if (photoService == null) {
+            photoService = new PhotoService(executor, accessToken, objectMapper);
+        }
+        return photoService;
+    }
+    /**
+     * @return the shareService
+     */
+    public ShareService getShareService(){
+        if (shareService == null) {
+            shareService = new ShareService(executor, accessToken, objectMapper);
+        }
+        return shareService;
     }
     /**
      * @return the notificationService
@@ -249,6 +305,15 @@ public class RennClient {
         return notificationService;
     }
     /**
+     * @return the ubbService
+     */
+    public UbbService getUbbService(){
+        if (ubbService == null) {
+            ubbService = new UbbService(executor, accessToken, objectMapper);
+        }
+        return ubbService;
+    }
+    /**
      * @return the feedService
      */
     public FeedService getFeedService(){
@@ -258,22 +323,13 @@ public class RennClient {
         return feedService;
     }
     /**
-     * @return the blogService
+     * @return the commentService
      */
-    public BlogService getBlogService(){
-        if (blogService == null) {
-            blogService = new BlogService(executor, accessToken, objectMapper);
+    public CommentService getCommentService(){
+        if (commentService == null) {
+            commentService = new CommentService(executor, accessToken, objectMapper);
         }
-        return blogService;
-    }
-    /**
-     * @return the photoService
-     */
-    public PhotoService getPhotoService(){
-        if (photoService == null) {
-            photoService = new PhotoService(executor, accessToken, objectMapper);
-        }
-        return photoService;
+        return commentService;
     }
     /**
      * @return the userService

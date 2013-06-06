@@ -6,35 +6,23 @@
  */
 package com.renren.api.service;
 /**
- * 兴趣的类型
+ * 应用图标大小的枚举。
  */
- public enum LikeCatagory {
+ public enum IconSize {
 	/*
-	 * 运动
+	 * 75pt x 75pt
 	 */
-	SPORT,	
+	MAIN,	
 	/*
-	 * 电影
+	 * 16pt x 16pt
 	 */
-	MOVIE,	
+	TINY,	
 	/*
-	 * 动漫
+	 * 100pt x 100pt
 	 */
-	CARTOON,	
+	LARGE,	
 	/*
-	 * 游戏
+	 * 48pt x 48pt
 	 */
-	GAME,	
-	/*
-	 * 音乐
-	 */
-	MUSIC,	
-	/*
-	 * 书籍
-	 */
-	BOOK,	
-	/*
-	 * 爱好
-	 */
-	INTEREST;	
+	SMALL;	
 }

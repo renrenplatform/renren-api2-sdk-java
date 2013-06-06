@@ -6,35 +6,27 @@
  */
 package com.renren.api.service;
 /**
- * 兴趣的类型
+ * 
  */
- public enum LikeCatagory {
+ public enum LocationFeedType {
 	/*
-	 * 运动
+	 * 全部类型
 	 */
-	SPORT,	
+	TYPE_ALL,	
 	/*
-	 * 电影
+	 * 照片类型
 	 */
-	MOVIE,	
+	TYPE_IMAGE,	
 	/*
-	 * 动漫
+	 * 签到类型
 	 */
-	CARTOON,	
+	TYPE_CHECKIN,	
 	/*
-	 * 游戏
+	 * 状态类型
 	 */
-	GAME,	
+	TYPE_STATUS,	
 	/*
-	 * 音乐
+	 * 地点评价类型
 	 */
-	MUSIC,	
-	/*
-	 * 书籍
-	 */
-	BOOK,	
-	/*
-	 * 爱好
-	 */
-	INTEREST;	
+	TYPE_POINT;	
 }

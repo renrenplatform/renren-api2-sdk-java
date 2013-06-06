@@ -20,7 +20,7 @@ import com.renren.api.RennResponse;
 import com.renren.api.mapper.JsonMappingException;
 import com.renren.api.mapper.ObjectMapper;
 
-public class UbbService {
+public class AppService {
 	private RennExecutor executor;
 
     private AccessToken token;
@@ -32,7 +32,7 @@ public class UbbService {
      * @param token
      * @param mapper
      */
-    public UbbService(RennExecutor executor, AccessToken token, ObjectMapper mapper) {
+    public AppService(RennExecutor executor, AccessToken token, ObjectMapper mapper) {
         super();
         this.executor = executor;
         this.token = token;
@@ -40,18 +40,19 @@ public class UbbService {
     }
 
     /**
-     * 获取人人网ubb列表
-     * @return Ubb UBB表情
+     * 获取某个应用的信息，部分信息取自缓存，不能立即生效
+     * @return App App
      * @throws   RennException 
+     * SERVICE_BUSY 服务器繁忙，请稍后再试。 
      */
-    public Ubb [] listUbb () throws RennException {
+    public App getApp () throws RennException {
         Map<String, String> textParams = new HashMap<String, String>();
         Map<String, String> bodyParams = new HashMap<String, String>();
         Map<String, File> fileParams = new HashMap<String, File>();
-        RennRequest request = new RennRequest("/v2/ubb/list", Method.GET, textParams, bodyParams, fileParams, token);
+        RennRequest request = new RennRequest("/v2/app/get", Method.GET, textParams, bodyParams, fileParams, token);
         RennResponse response = executor.execute(request);
         try {
-            return (Ubb [])mapper.mapCommon(response.getResponse().toString(), Ubb.class);
+            return (App)mapper.mapCommon(response.getResponse().toString(), App.class);
         } catch (JsonMappingException e) {
             throw new ObjectMappingException();
         }

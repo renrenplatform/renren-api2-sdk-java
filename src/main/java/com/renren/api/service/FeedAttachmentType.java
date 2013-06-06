@@ -6,35 +6,31 @@
  */
 package com.renren.api.service;
 /**
- * 兴趣的类型
+ * 新鲜事附加内容类型
  */
- public enum LikeCatagory {
+ public enum FeedAttachmentType {
 	/*
-	 * 运动
+	 * 链接
 	 */
-	SPORT,	
+	LINK,	
 	/*
-	 * 电影
+	 * 相册
 	 */
-	MOVIE,	
+	ALBUM,	
 	/*
-	 * 动漫
+	 * 日志
 	 */
-	CARTOON,	
+	BLOG,	
 	/*
-	 * 游戏
+	 * 视频
 	 */
-	GAME,	
+	VIDEO,	
 	/*
-	 * 音乐
+	 * 状态
 	 */
-	MUSIC,	
+	STATUS,	
 	/*
-	 * 书籍
+	 * 图片
 	 */
-	BOOK,	
-	/*
-	 * 爱好
-	 */
-	INTEREST;	
+	PHOTO;	
 }

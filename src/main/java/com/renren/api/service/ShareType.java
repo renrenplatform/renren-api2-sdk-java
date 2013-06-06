@@ -6,35 +6,23 @@
  */
 package com.renren.api.service;
 /**
- * 兴趣的类型
+ * 
  */
- public enum LikeCatagory {
+ public enum ShareType {
 	/*
-	 * 运动
+	 * 视频类型分享
 	 */
-	SPORT,	
+	TYPE_VIDEO,	
 	/*
-	 * 电影
+	 * 日志类型分享
 	 */
-	MOVIE,	
+	TYPE_BLOG,	
 	/*
-	 * 动漫
+	 * 照片类型分享
 	 */
-	CARTOON,	
+	TYPE_PHOTO,	
 	/*
-	 * 游戏
+	 * 相册类型分享
 	 */
-	GAME,	
-	/*
-	 * 音乐
-	 */
-	MUSIC,	
-	/*
-	 * 书籍
-	 */
-	BOOK,	
-	/*
-	 * 爱好
-	 */
-	INTEREST;	
+	TYPE_ALBUM;	
 }
