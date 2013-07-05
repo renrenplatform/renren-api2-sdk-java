@@ -16,8 +16,8 @@ import com.renren.api.json.JSONException;
 import com.renren.api.json.JSONObject;
 import com.renren.api.mapper.ObjectMapper;
 import com.renren.api.service.AppService;
-import com.renren.api.service.LocationService;
 import com.renren.api.service.StatusService;
+import com.renren.api.service.LocationService;
 import com.renren.api.service.AlbumService;
 import com.renren.api.service.BlogService;
 import com.renren.api.service.LikeService;
@@ -26,8 +26,10 @@ import com.renren.api.service.ShareService;
 import com.renren.api.service.NotificationService;
 import com.renren.api.service.UbbService;
 import com.renren.api.service.FeedService;
+import com.renren.api.service.PlaceService;
 import com.renren.api.service.CommentService;
 import com.renren.api.service.UserService;
+import com.renren.api.service.FriendService;
 import com.renren.api.service.ProfileService;
 
 
@@ -67,13 +69,13 @@ public class RennClient {
      */
     private AppService appService;
     /**
-     *  location 对应的API服务
-     */
-    private LocationService locationService;
-    /**
      *  status 对应的API服务
      */
     private StatusService statusService;
+    /**
+     *  location 对应的API服务
+     */
+    private LocationService locationService;
     /**
      *  album 对应的API服务
      */
@@ -107,6 +109,10 @@ public class RennClient {
      */
     private FeedService feedService;
     /**
+     *  place 对应的API服务
+     */
+    private PlaceService placeService;
+    /**
      *  comment 对应的API服务
      */
     private CommentService commentService;
@@ -114,6 +120,10 @@ public class RennClient {
      *  user 对应的API服务
      */
     private UserService userService;
+    /**
+     *  friend 对应的API服务
+     */
+    private FriendService friendService;
     /**
      *  profile 对应的API服务
      */
@@ -233,15 +243,6 @@ public class RennClient {
         return appService;
     }
     /**
-     * @return the locationService
-     */
-    public LocationService getLocationService(){
-        if (locationService == null) {
-            locationService = new LocationService(executor, accessToken, objectMapper);
-        }
-        return locationService;
-    }
-    /**
      * @return the statusService
      */
     public StatusService getStatusService(){
@@ -249,6 +250,15 @@ public class RennClient {
             statusService = new StatusService(executor, accessToken, objectMapper);
         }
         return statusService;
+    }
+    /**
+     * @return the locationService
+     */
+    public LocationService getLocationService(){
+        if (locationService == null) {
+            locationService = new LocationService(executor, accessToken, objectMapper);
+        }
+        return locationService;
     }
     /**
      * @return the albumService
@@ -323,6 +333,15 @@ public class RennClient {
         return feedService;
     }
     /**
+     * @return the placeService
+     */
+    public PlaceService getPlaceService(){
+        if (placeService == null) {
+            placeService = new PlaceService(executor, accessToken, objectMapper);
+        }
+        return placeService;
+    }
+    /**
      * @return the commentService
      */
     public CommentService getCommentService(){
@@ -339,6 +358,15 @@ public class RennClient {
             userService = new UserService(executor, accessToken, objectMapper);
         }
         return userService;
+    }
+    /**
+     * @return the friendService
+     */
+    public FriendService getFriendService(){
+        if (friendService == null) {
+            friendService = new FriendService(executor, accessToken, objectMapper);
+        }
+        return friendService;
     }
     /**
      * @return the profileService

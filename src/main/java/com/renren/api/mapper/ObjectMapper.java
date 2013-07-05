@@ -93,6 +93,26 @@ public class ObjectMapper {
 		}
 		return t;
 	}
+	public <T> T[] mapBaseArray(String jsonString, Class<T> clazz) throws JsonMappingException {
+		jsonString = jsonString.replaceAll("\\[","");
+		jsonString = jsonString.replaceAll("\\]", "");
+		if(jsonString.equals("")) {
+			return (T[]) Array.newInstance(clazz, 0);
+		}
+		String [] strArray = jsonString.split(",");
+		T[] values = (T[]) Array.newInstance(clazz, strArray.length);
+		Constructor<?> ctor = null;
+		for(int i=0;i<strArray.length;i++) {
+			try {
+				ctor = clazz.getConstructor(String.class);
+				values[i] = (T) ctor.newInstance(strArray[i].trim());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				throw new JsonMappingException(e);
+			}
+		}
+		return values;
+	}
 	/**
 	 * 根据jsonStr的不同值，返回不同的object
 	 * @param jsonStr
@@ -105,7 +125,12 @@ public class ObjectMapper {
 	 */
 	public Object mapCommon(String jsonStr, Class<?> clazz) throws JsonMappingException{
 		if (jsonStr.startsWith("[")) {
-			return mapArray(jsonStr, clazz);
+			if(jsonStr.contains("{")) {
+				return mapArray(jsonStr, clazz);
+			}else {
+				//反序列化基本类型数组
+				return mapBaseArray(jsonStr,clazz);
+			}
 		} else if (jsonStr.startsWith("{")) {
 			return map(jsonStr, clazz);
 		} else {
