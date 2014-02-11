@@ -141,7 +141,7 @@ public class RennClient {
         this.objectMapper = new ObjectMapper();
     }
 
-    public void authorizeWithAuthorizationCode(String code, String redirectUri)
+    public AccessToken authorizeWithAuthorizationCode(String code, String redirectUri)
             throws AuthorizationException {
 
         Map<String, String> params = new HashMap<String, String>();
@@ -153,6 +153,7 @@ public class RennClient {
         params.put("token_type", AccessToken.Type.MAC.toString());
 
         this.accessToken = requestAccessToken(params);
+        return this.accessToken;
     }
 
     /**
