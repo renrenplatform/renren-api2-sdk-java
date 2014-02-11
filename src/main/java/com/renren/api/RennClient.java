@@ -14,6 +14,7 @@ import com.renren.api.http.HttpRequest;
 import com.renren.api.http.HttpRequest.HttpRequestException;
 import com.renren.api.json.JSONException;
 import com.renren.api.json.JSONObject;
+import com.renren.api.mapper.JsonMappingException;
 import com.renren.api.mapper.ObjectMapper;
 import com.renren.api.service.AppService;
 import com.renren.api.service.StatusService;
@@ -28,6 +29,7 @@ import com.renren.api.service.UbbService;
 import com.renren.api.service.FeedService;
 import com.renren.api.service.PlaceService;
 import com.renren.api.service.CommentService;
+import com.renren.api.service.User;
 import com.renren.api.service.UserService;
 import com.renren.api.service.FriendService;
 import com.renren.api.service.ProfileService;
@@ -184,8 +186,16 @@ public class RennClient {
                         : AccessToken.Type.Bearer;
                 
                 int expiresIn = response.has("expires_in") ? response.getInt("expires_in"): 0;
+                
+                User user = null;
+                if(response.has("user")){
+                	try {
+                		user = objectMapper.map(response.getJSONObject("user"), User.class);
+					} catch (JsonMappingException e) {
+					}
+                }
 
-                return new AccessToken(type, accessToken, refreshToken, macKey, macAlgorithm, expiresIn);
+                return new AccessToken(type, accessToken, refreshToken, macKey, macAlgorithm, expiresIn, user);
 
             } else {
                 throw new AuthorizationException("Authorization failed with Authorization Code. "

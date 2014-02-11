@@ -5,6 +5,8 @@
  */
 package com.renren.api;
 
+import com.renren.api.service.User;
+
 /**
  * @author Xun Dai <xun.dai@renren-inc.com>
  * 
@@ -26,8 +28,18 @@ public class AccessToken {
     private String macAlgorithm;
     
     private int expiresIn;
+    
+    private User user;
 
-    public int getExpiresIn() {
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public int getExpiresIn() {
 		return expiresIn;
 	}
 
@@ -56,7 +68,7 @@ public class AccessToken {
     }
 
     public AccessToken(Type type, String accessToken, String refreshToken, String macKey,
-            String macAlgorithm, int expiresIn) {
+            String macAlgorithm, int expiresIn, User user) {
         super();
         this.type = type;
         this.accessToken = accessToken;
@@ -64,6 +76,7 @@ public class AccessToken {
         this.macKey = macKey;
         this.macAlgorithm = macAlgorithm;
         this.expiresIn = expiresIn;
+        this.user = user;
     }
     
     public AccessToken(Type type, String accessToken, String refreshToken, String macKey,
