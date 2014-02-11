@@ -182,8 +182,10 @@ public class RennClient {
                 AccessToken.Type type = response.has("mac_algorithm")
                         && response.has("mac_algorithm") ? AccessToken.Type.MAC
                         : AccessToken.Type.Bearer;
+                
+                int expiresIn = response.getInt("expires_in");
 
-                return new AccessToken(type, accessToken, refreshToken, macKey, macAlgorithm);
+                return new AccessToken(type, accessToken, refreshToken, macKey, macAlgorithm, expiresIn);
 
             } else {
                 throw new AuthorizationException("Authorization failed with Authorization Code. "

@@ -24,8 +24,18 @@ public class AccessToken {
     private String macKey;
 
     private String macAlgorithm;
+    
+    private int expiresIn;
 
-    public Type getType() {
+    public int getExpiresIn() {
+		return expiresIn;
+	}
+
+	public void setExpiresIn(int expiresIn) {
+		this.expiresIn = expiresIn;
+	}
+
+	public Type getType() {
         return type;
     }
 
@@ -45,6 +55,17 @@ public class AccessToken {
         return macAlgorithm;
     }
 
+    public AccessToken(Type type, String accessToken, String refreshToken, String macKey,
+            String macAlgorithm, int expiresIn) {
+        super();
+        this.type = type;
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
+        this.macKey = macKey;
+        this.macAlgorithm = macAlgorithm;
+        this.expiresIn = expiresIn;
+    }
+    
     public AccessToken(Type type, String accessToken, String refreshToken, String macKey,
             String macAlgorithm) {
         super();
