@@ -150,7 +150,7 @@ public class RennClient {
         params.put("grant_type", "authorization_code");
         params.put("code", code);
         params.put("redirect_uri", redirectUri);
-        params.put("token_type", AccessToken.Type.MAC.toString());
+        params.put("token_type", AccessToken.Type.Bearer.toString());
 
         this.accessToken = requestAccessToken(params);
         return this.accessToken;
@@ -183,7 +183,7 @@ public class RennClient {
                         && response.has("mac_algorithm") ? AccessToken.Type.MAC
                         : AccessToken.Type.Bearer;
                 
-                int expiresIn = response.getInt("expires_in");
+                int expiresIn = response.has("expires_in") ? response.getInt("expires_in"): 0;
 
                 return new AccessToken(type, accessToken, refreshToken, macKey, macAlgorithm, expiresIn);
 
