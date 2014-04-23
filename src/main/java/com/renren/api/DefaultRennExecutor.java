@@ -47,7 +47,7 @@ public class DefaultRennExecutor implements RennExecutor {
         RennRequest.Method method = request.getMethod();
         Map<String, String> textParams = request.getTextParams();
         Map<String, String> bodyParams = request.getBodyParams();
-        Map<String, File> fileParams = request.getFileParams();
+        Map<String, File[]> fileParams = request.getFileParams();
         AccessToken accessToken = request.getAccessToken();
 
         if (logger.isDebugEnabled()) {
@@ -138,9 +138,14 @@ public class DefaultRennExecutor implements RennExecutor {
         httpRequest.userAgent(USER_AGENT);
         
         if (fileParams != null && fileParams.size() > 0) {
-            for (Entry<String, File> fileParam : fileParams.entrySet()) {
-                File file = fileParam.getValue();
-                httpRequest.part(fileParam.getKey(), file.getName(), file);
+            for (Entry<String, File[]> fileParam : fileParams.entrySet()) {
+            	//兼容多图上传
+                File[] files = fileParam.getValue();
+                if(files!=null&&files.length>0){
+                	for(File file:files) {
+                		httpRequest.part(fileParam.getKey(), file.getName(), file);
+                	}
+                }
             }
             if (bodyParams != null && bodyParams.size() > 0) {
                 for (Entry<String, String> bodyParam : bodyParams.entrySet()) {

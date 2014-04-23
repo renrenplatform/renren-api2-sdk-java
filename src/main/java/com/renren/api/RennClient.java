@@ -15,22 +15,22 @@ import com.renren.api.http.HttpRequest.HttpRequestException;
 import com.renren.api.json.JSONException;
 import com.renren.api.json.JSONObject;
 import com.renren.api.mapper.ObjectMapper;
-import com.renren.api.service.AppService;
-import com.renren.api.service.StatusService;
-import com.renren.api.service.LocationService;
+import com.renren.api.service.PhoneService;
 import com.renren.api.service.AlbumService;
 import com.renren.api.service.BlogService;
+import com.renren.api.service.ShareService;
+import com.renren.api.service.PageService;
+import com.renren.api.service.UbbService;
+import com.renren.api.service.NotificationService;
+import com.renren.api.service.FeedService;
+import com.renren.api.service.ProfileService;
+import com.renren.api.service.AppService;
+import com.renren.api.service.StatusService;
+import com.renren.api.service.RsakeyService;
 import com.renren.api.service.LikeService;
 import com.renren.api.service.PhotoService;
-import com.renren.api.service.ShareService;
-import com.renren.api.service.NotificationService;
-import com.renren.api.service.UbbService;
-import com.renren.api.service.FeedService;
-import com.renren.api.service.PlaceService;
 import com.renren.api.service.CommentService;
 import com.renren.api.service.UserService;
-import com.renren.api.service.FriendService;
-import com.renren.api.service.ProfileService;
 
 
 /**
@@ -65,17 +65,9 @@ public class RennClient {
     private ObjectMapper objectMapper;
 
     /**
-     *  app 对应的API服务
+     *  phone 对应的API服务
      */
-    private AppService appService;
-    /**
-     *  status 对应的API服务
-     */
-    private StatusService statusService;
-    /**
-     *  location 对应的API服务
-     */
-    private LocationService locationService;
+    private PhoneService phoneService;
     /**
      *  album 对应的API服务
      */
@@ -85,6 +77,42 @@ public class RennClient {
      */
     private BlogService blogService;
     /**
+     *  share 对应的API服务
+     */
+    private ShareService shareService;
+    /**
+     *  page 对应的API服务
+     */
+    private PageService pageService;
+    /**
+     *  ubb 对应的API服务
+     */
+    private UbbService ubbService;
+    /**
+     *  notification 对应的API服务
+     */
+    private NotificationService notificationService;
+    /**
+     *  feed 对应的API服务
+     */
+    private FeedService feedService;
+    /**
+     *  profile 对应的API服务
+     */
+    private ProfileService profileService;
+    /**
+     *  app 对应的API服务
+     */
+    private AppService appService;
+    /**
+     *  status 对应的API服务
+     */
+    private StatusService statusService;
+    /**
+     *  rsakey 对应的API服务
+     */
+    private RsakeyService rsakeyService;
+    /**
      *  like 对应的API服务
      */
     private LikeService likeService;
@@ -93,26 +121,6 @@ public class RennClient {
      */
     private PhotoService photoService;
     /**
-     *  share 对应的API服务
-     */
-    private ShareService shareService;
-    /**
-     *  notification 对应的API服务
-     */
-    private NotificationService notificationService;
-    /**
-     *  ubb 对应的API服务
-     */
-    private UbbService ubbService;
-    /**
-     *  feed 对应的API服务
-     */
-    private FeedService feedService;
-    /**
-     *  place 对应的API服务
-     */
-    private PlaceService placeService;
-    /**
      *  comment 对应的API服务
      */
     private CommentService commentService;
@@ -120,14 +128,6 @@ public class RennClient {
      *  user 对应的API服务
      */
     private UserService userService;
-    /**
-     *  friend 对应的API服务
-     */
-    private FriendService friendService;
-    /**
-     *  profile 对应的API服务
-     */
-    private ProfileService profileService;
 
     /**
      * @param clientId
@@ -234,31 +234,13 @@ public class RennClient {
     }
 
     /**
-     * @return the appService
+     * @return the phoneService
      */
-    public AppService getAppService(){
-        if (appService == null) {
-            appService = new AppService(executor, accessToken, objectMapper);
+    public PhoneService getPhoneService(){
+        if (phoneService == null) {
+            phoneService = new PhoneService(executor, accessToken, objectMapper);
         }
-        return appService;
-    }
-    /**
-     * @return the statusService
-     */
-    public StatusService getStatusService(){
-        if (statusService == null) {
-            statusService = new StatusService(executor, accessToken, objectMapper);
-        }
-        return statusService;
-    }
-    /**
-     * @return the locationService
-     */
-    public LocationService getLocationService(){
-        if (locationService == null) {
-            locationService = new LocationService(executor, accessToken, objectMapper);
-        }
-        return locationService;
+        return phoneService;
     }
     /**
      * @return the albumService
@@ -279,6 +261,87 @@ public class RennClient {
         return blogService;
     }
     /**
+     * @return the shareService
+     */
+    public ShareService getShareService(){
+        if (shareService == null) {
+            shareService = new ShareService(executor, accessToken, objectMapper);
+        }
+        return shareService;
+    }
+    /**
+     * @return the pageService
+     */
+    public PageService getPageService(){
+        if (pageService == null) {
+            pageService = new PageService(executor, accessToken, objectMapper);
+        }
+        return pageService;
+    }
+    /**
+     * @return the ubbService
+     */
+    public UbbService getUbbService(){
+        if (ubbService == null) {
+            ubbService = new UbbService(executor, accessToken, objectMapper);
+        }
+        return ubbService;
+    }
+    /**
+     * @return the notificationService
+     */
+    public NotificationService getNotificationService(){
+        if (notificationService == null) {
+            notificationService = new NotificationService(executor, accessToken, objectMapper);
+        }
+        return notificationService;
+    }
+    /**
+     * @return the feedService
+     */
+    public FeedService getFeedService(){
+        if (feedService == null) {
+            feedService = new FeedService(executor, accessToken, objectMapper);
+        }
+        return feedService;
+    }
+    /**
+     * @return the profileService
+     */
+    public ProfileService getProfileService(){
+        if (profileService == null) {
+            profileService = new ProfileService(executor, accessToken, objectMapper);
+        }
+        return profileService;
+    }
+    /**
+     * @return the appService
+     */
+    public AppService getAppService(){
+        if (appService == null) {
+            appService = new AppService(executor, accessToken, objectMapper);
+        }
+        return appService;
+    }
+    /**
+     * @return the statusService
+     */
+    public StatusService getStatusService(){
+        if (statusService == null) {
+            statusService = new StatusService(executor, accessToken, objectMapper);
+        }
+        return statusService;
+    }
+    /**
+     * @return the rsakeyService
+     */
+    public RsakeyService getRsakeyService(){
+        if (rsakeyService == null) {
+            rsakeyService = new RsakeyService(executor, accessToken, objectMapper);
+        }
+        return rsakeyService;
+    }
+    /**
      * @return the likeService
      */
     public LikeService getLikeService(){
@@ -297,51 +360,6 @@ public class RennClient {
         return photoService;
     }
     /**
-     * @return the shareService
-     */
-    public ShareService getShareService(){
-        if (shareService == null) {
-            shareService = new ShareService(executor, accessToken, objectMapper);
-        }
-        return shareService;
-    }
-    /**
-     * @return the notificationService
-     */
-    public NotificationService getNotificationService(){
-        if (notificationService == null) {
-            notificationService = new NotificationService(executor, accessToken, objectMapper);
-        }
-        return notificationService;
-    }
-    /**
-     * @return the ubbService
-     */
-    public UbbService getUbbService(){
-        if (ubbService == null) {
-            ubbService = new UbbService(executor, accessToken, objectMapper);
-        }
-        return ubbService;
-    }
-    /**
-     * @return the feedService
-     */
-    public FeedService getFeedService(){
-        if (feedService == null) {
-            feedService = new FeedService(executor, accessToken, objectMapper);
-        }
-        return feedService;
-    }
-    /**
-     * @return the placeService
-     */
-    public PlaceService getPlaceService(){
-        if (placeService == null) {
-            placeService = new PlaceService(executor, accessToken, objectMapper);
-        }
-        return placeService;
-    }
-    /**
      * @return the commentService
      */
     public CommentService getCommentService(){
@@ -358,24 +376,6 @@ public class RennClient {
             userService = new UserService(executor, accessToken, objectMapper);
         }
         return userService;
-    }
-    /**
-     * @return the friendService
-     */
-    public FriendService getFriendService(){
-        if (friendService == null) {
-            friendService = new FriendService(executor, accessToken, objectMapper);
-        }
-        return friendService;
-    }
-    /**
-     * @return the profileService
-     */
-    public ProfileService getProfileService(){
-        if (profileService == null) {
-            profileService = new ProfileService(executor, accessToken, objectMapper);
-        }
-        return profileService;
     }
 }
 

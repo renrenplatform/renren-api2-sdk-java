@@ -23,15 +23,17 @@ public class RennRequest {
     private Method method;
 
     private Map<String, String> textParams;
-
-    private Map<String, File> fileParams;
+    /**
+     * 兼容多图上传
+     */
+    private Map<String, File[]> fileParams;
     
     private Map<String, String> bodyParams;
 
     private AccessToken accessToken;
 
     public RennRequest(String path, Method method, Map<String, String> textParams, Map<String, String> bodyParams,
-            Map<String, File> fileParams, AccessToken accessToken) {
+            Map<String, File[]> fileParams, AccessToken accessToken) {
         super();
         this.path = path;
         this.method = method;
@@ -81,7 +83,7 @@ public class RennRequest {
      * 
      * @return 文件请求参数集合
      */
-    public Map<String, File> getFileParams() {
+    public Map<String, File[]> getFileParams() {
         return fileParams;
     }
     /**
