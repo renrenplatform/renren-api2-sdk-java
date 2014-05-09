@@ -36,7 +36,7 @@ public class TestExecutor {
         try {
             RennResponse response = executer.execute(request);
             JSONObject rep = (JSONObject) response.getResponse();
-            Assert.assertEquals(222209506l, rep.getJSONObject("response").getLong("id"));
+            Assert.assertEquals(222209506l, rep.getLong("id"));
         } catch (RennException e) {
             Assert.assertTrue(false);
         } catch (JSONException e) {
