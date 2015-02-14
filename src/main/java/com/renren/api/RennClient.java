@@ -14,6 +14,7 @@ import com.renren.api.http.HttpRequest;
 import com.renren.api.http.HttpRequest.HttpRequestException;
 import com.renren.api.json.JSONException;
 import com.renren.api.json.JSONObject;
+import com.renren.api.mapper.JsonMappingException;
 import com.renren.api.mapper.ObjectMapper;
 import com.renren.api.service.LocationService;
 import com.renren.api.service.AlbumService;
@@ -33,6 +34,7 @@ import com.renren.api.service.LikeService;
 import com.renren.api.service.PhotoService;
 import com.renren.api.service.CheckinService;
 import com.renren.api.service.CommentService;
+import com.renren.api.service.User;
 import com.renren.api.service.UserService;
 import com.renren.api.service.FriendService;
 
@@ -161,7 +163,7 @@ public class RennClient {
         this.objectMapper = new ObjectMapper();
     }
 
-    public void authorizeWithAuthorizationCode(String code, String redirectUri)
+    public AccessToken authorizeWithAuthorizationCode(String code, String redirectUri)
             throws AuthorizationException {
 
         Map<String, String> params = new HashMap<String, String>();
@@ -170,9 +172,10 @@ public class RennClient {
         params.put("grant_type", "authorization_code");
         params.put("code", code);
         params.put("redirect_uri", redirectUri);
-        params.put("token_type", AccessToken.Type.MAC.toString());
+        params.put("token_type", AccessToken.Type.Bearer.toString());
 
         this.accessToken = requestAccessToken(params);
+        return this.accessToken;
     }
 
     /**
@@ -201,8 +204,18 @@ public class RennClient {
                 AccessToken.Type type = response.has("mac_algorithm")
                         && response.has("mac_algorithm") ? AccessToken.Type.MAC
                         : AccessToken.Type.Bearer;
+                
+                int expiresIn = response.has("expires_in") ? response.getInt("expires_in"): 0;
+                
+                User user = null;
+                if(response.has("user")){
+                	try {
+                		user = objectMapper.map(response.getJSONObject("user"), User.class);
+					} catch (JsonMappingException e) {
+					}
+                }
 
-                return new AccessToken(type, accessToken, refreshToken, macKey, macAlgorithm);
+                return new AccessToken(type, accessToken, refreshToken, macKey, macAlgorithm, expiresIn, user);
 
             } else {
                 throw new AuthorizationException("Authorization failed with Authorization Code. "
